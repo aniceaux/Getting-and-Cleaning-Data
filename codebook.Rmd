@@ -1,0 +1,64 @@
+---
+title: "Codebook for Getting and Cleaning UCI HAR Dataset"
+author: "aniceaux"
+date: "January 29, 2019"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+### Dataset File
+
+https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip
+
+
+### Source of Dataset
+
+http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones
+	
+
+### Purpose
+
+Demonstrate the ability yo collect and clean data
+
+### Goal
+
+Preapare tidy data that can be used for later analysis
+
+### Process
+
+Rscript, `run_analysis.R`, performs the following processes to create a tidy dataset:
+
+- Load `data.table` library
+- Read in the files from the working directory using the `read.table()`
+- Merge the training and test datasets to create one datset
+- Extract only the measurements on the mean and standard deviation using the `grep()` for pattern matching and replacement
+- Use the `sapply()` and `gsub()` to replace the original activity names with more descriptive names
+- Use the `activity_labels.txt` file to apply more appropriate labels
+- Load the `reshape2` library to create a tidy, transformed dataset with the `mean` of each variable
+- Use `melt()` and `dcast` to reshape and aggreate the data 
+- Call the `write.table` function to export the tidy dataset.
+
+
+### Variables
+
+- x_test read in `UCI HAR Dataset/test/X_test.txt`
+- y_test read in `UCI HAR Dataset/test/y_test.txt`
+- subject_test read in `UCI HAR Dataset/test/subject_test.txt`
+- x_train read in `UCI HAR Dataset/train/X_train.txt`
+- y_train read in `UCI HAR Dataset/train/y_train.txt`
+- subject_train read in `UCI HAR Dataset/train/subject_train.txt`
+- activity_labels read in `UCI HAR Dataset/activity_labels.txt`
+- features read in `UCI HAR Dataset/features.txt`
+- mean_std is avariable to store the mean and standard deviation
+- featureNames is a varibale to store the simplified vector for `features.txt`
+- subject is a variable to combine `subject_train` and `subject_test`
+- activity is a variable to combine `y_train` and `y_test`
+- mergedDataset to create one dataset from `x_train`, `x_test`, `y_train`, and `y_test`
+- activity_names stores descriptive activity names
+
+
+### Output
+
+`tidy_UCI_HAR_Dataset.txt`
+
